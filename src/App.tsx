@@ -1,5 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import { AppProvider } from '@/context/AppContext'
+import { AppProvider, useApp } from '@/context/AppContext'
 import { AuthProvider, useAuth } from '@/context/AuthContext'
 import { ToastProvider } from '@/context/ToastContext'
 import { AppLayout } from '@/components/layout/AppLayout'
@@ -18,7 +18,7 @@ import { ScanPage } from '@/pages/Scan'
 import { LeaksPage } from '@/pages/Leaks'
 import { WhatIfPage } from '@/pages/WhatIf'
 import { AffordPage } from '@/pages/Afford'
-import { useEffect, useState, type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 
 const pages = <>
   <Route index element={<DashboardPage />} />
@@ -37,15 +37,18 @@ const pages = <>
   <Route path="*" element={<Navigate to="/" replace />} />
 </>
 
+function ProtectedContent() {
+  const { currentUser } = useAuth()
+  const { ready, onboardingCompleted } = useApp()
+  if (!ready) return <Loading />
+  return <><AppLayout />{!onboardingCompleted && currentUser && <Onboarding onDone={() => {}} />}</>
+}
+
 function ProtectedLayout() {
   const { currentUser, ready } = useAuth()
-  const [showOnboarding, setShowOnboarding] = useState(false)
-  useEffect(() => {
-    setShowOnboarding(Boolean(currentUser && !localStorage.getItem(`moneyCopilot_onboarding_${currentUser.id}`)))
-  }, [currentUser?.id])
   if (!ready) return <Loading />
   if (!currentUser) return <Navigate to="/login" replace />
-  return <AppProvider><AppLayout />{showOnboarding && <Onboarding userId={currentUser.id} onDone={() => setShowOnboarding(false)} />}</AppProvider>
+  return <AppProvider><ProtectedContent /></AppProvider>
 }
 
 function AuthGate({ children }: { children: ReactNode }) {
