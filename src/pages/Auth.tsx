@@ -41,10 +41,10 @@ export function SignupPage() {
     e.preventDefault()
     setError('')
     if (!form.name.trim() || !form.email.trim() || !form.password || !form.confirm) return setError('Please fill in all fields.')
-    if (!/^\\S+@\\S+\\.\\S+$/.test(form.email)) return setError('Enter a valid email address.')
+    if (!/^\S+@\S+\.\S+$/.test(form.email.trim())) return setError('Enter a valid email address.')
     if (form.password.length < 6) return setError('Password must be at least 6 characters.')
     if (form.password !== form.confirm) return setError('Passwords do not match.')
-    const message = await signup(form.name, form.email, form.password)
+    const message = await signup(form.name.trim(), form.email.trim().toLowerCase(), form.password)
     if (message) setError(message)
     else navigate('/')
   }
