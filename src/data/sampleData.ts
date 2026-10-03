@@ -2,7 +2,6 @@ import type { AppSettings } from '@/types'
 
 export const defaultSettings: AppSettings = {
   darkMode: false,
-  demoDataLoaded: false,
   currency: 'INR',
   userName: '',
   studentMode: {
