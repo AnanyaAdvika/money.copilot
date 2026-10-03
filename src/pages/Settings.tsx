@@ -6,7 +6,8 @@ import { ConfirmDialog } from '@/components/ui/Modal'
 import { useApp } from '@/context/AppContext'
 import { useToast } from '@/context/ToastContext'
 import { downloadCSV, exportTransactionsCSV } from '@/lib/calculations'
-import { Moon, RotateCcw, Sun, Trash2 } from 'lucide-react'
+import { Moon, Sun } from 'lucide-react'
+import { useAuth } from '@/context/AuthContext'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -27,7 +28,7 @@ export function SettingsPage() {
     <div className="space-y-6 animate-fade-up max-w-3xl">
       <PageHeader
         title="Settings"
-        subtitle="Theme, student mode, demo data, and exports."
+        subtitle="Theme, student mode, and exports."
       />
 
       <Card>
@@ -157,7 +158,7 @@ export function SettingsPage() {
           >
             <RotateCcw className="h-4 w-4" /> Reload Sample Demo Data
           </Button>
-          <div className="pt-2 grid grid-cols-2 gap-2 text-sm">
+          <Button variant="outline" className="w-full justify-start" onClick={logout}>Log out</Button>\n          <div className="pt-2 grid grid-cols-2 gap-2 text-sm">
             <Link to="/budgets" className="text-[var(--color-primary)]">
               Manage budgets →
             </Link>
