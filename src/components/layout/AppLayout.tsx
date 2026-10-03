@@ -187,6 +187,9 @@ export function AppLayout() {
               )}
             </div>
 
+            <span className="hidden sm:block text-sm font-medium text-[var(--color-ink)]">
+              Hello, {currentUser?.name || 'there'} 👋
+            </span>
             <button
               type="button"
               onClick={() => updateSettings({ darkMode: !settings.darkMode })}
@@ -194,6 +197,13 @@ export function AppLayout() {
               aria-label="Toggle dark mode"
             >
               {settings.darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
+            <button
+              type="button"
+              onClick={logout}
+              className="hidden sm:inline-flex h-10 items-center rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-elevated)] px-3 text-sm font-medium"
+            >
+              Log out
             </button>
           </div>
         </header>
