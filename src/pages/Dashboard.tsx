@@ -87,15 +87,7 @@ export function DashboardPage() {
         }
       />
 
-      {settings.demoDataLoaded && (
-        <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-200 flex flex-wrap items-center justify-between gap-2">
-          <span>
-            You're viewing <strong>demo data</strong> for a fictional student. Explore freely —
-            clear it anytime in Settings.
-          </span>
-          <Badge tone="warning">Demo</Badge>
-        </div>
-      )}
+
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <SummaryCard title="Balance" value={balance} icon={Wallet} tone="default" />

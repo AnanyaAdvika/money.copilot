@@ -18,6 +18,7 @@ import {
 } from 'lucide-react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useApp } from '@/context/AppContext'
+import { useAuth } from '@/context/AuthContext'
 import { cn } from '@/lib/utils'
 import { useMemo, useState } from 'react'
 import { ToastViewport } from '@/components/ui/Toast'
@@ -51,6 +52,7 @@ const featureShortcuts = [
 
 export function AppLayout() {
   const { settings, updateSettings, transactions, ready } = useApp()
+  const { currentUser, logout } = useAuth()
   const [query, setQuery] = useState('')
   const navigate = useNavigate()
 
