@@ -77,7 +77,6 @@ export interface StudentModeSettings {
 export interface AppSettings {
   darkMode: boolean
   studentMode: StudentModeSettings
-  demoDataLoaded: boolean
   currency: 'INR'
   userName: string
 }
